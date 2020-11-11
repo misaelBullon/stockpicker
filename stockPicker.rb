@@ -5,7 +5,6 @@ def stockpicker(array)
     ganancia = 0
     
     array.reverse_each do |item|
-        #puts "Item :#{item}"
         i = array.index(item) - 1
         while i >= 0 do
             diferencia = item - array[i]
@@ -18,7 +17,7 @@ def stockpicker(array)
         end
     end
     puts "Ganancia: #{ganancia}"
-    puts "Nuevo array: #{nArray}"
+    nArray
 end
 
-stockpicker(array)
+p stockpicker(array)
