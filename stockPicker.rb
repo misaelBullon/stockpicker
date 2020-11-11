@@ -1,21 +1,24 @@
-array = [19,20,6,9,15,8,18,1,10]
+array = [17,3,6,9,15,8,6,1,10]
 
 def stockpicker(array)
     nArray = Array.new
-    if(array.index(array.max) == 0)  #Si el mayor valor cae el primer dia no es opción de compra ni de venta, por eso se saltea como mayor
-        a1 = array.select{|num| num != array[0]}
-        maxArray = a1.max
-        min = a1[0..a1.index(maxArray)].min
-        nArray<<array.index(min) && nArray<<array.index(maxArray)
-    else
-        maxArray = array.max
-        min = array[0..array.index(array.max)].min
-        nArray<<array.index(min) && nArray<<array.index(maxArray)
+    ganancia = 0
+    
+    array.reverse_each do |item|
+        #puts "Item :#{item}"
+        i = array.index(item) - 1
+        while i >= 0 do
+            diferencia = item - array[i]
+            if diferencia > ganancia
+                ganancia = diferencia  
+                nArray[0] = i
+                nArray[1] = array.index(item)
+            end
+            i -= 1
+        end
     end
-
-    ganancia = maxArray - min
-    puts "Para una ganancia de #{ganancia}"
-    nArray
+    puts "Ganancia: #{ganancia}"
+    puts "Nuevo array: #{nArray}"
 end
 
-p stockpicker(array)
+stockpicker(array)
